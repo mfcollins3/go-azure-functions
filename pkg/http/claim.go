@@ -19,26 +19,13 @@
 // DEALINGS IN THE SOFTWARE.
 //
 
-package main
+package http
 
-import (
-	functions "github.com/mfcollins3/go-azure-functions/pkg/functions"
-	"log"
-)
-
-func checkInbox(response *functions.Response, request functions.Request) error {
-	log.Println("TODO: Implement checkInbox")
-	timerInfo, err := request.TimerInfo("timer")
-	if err != nil {
-		log.Printf("Error getting timer info: %v", err)
-		return err
-	}
-
-	log.Printf("%#v\n", timerInfo)
-	return nil
-}
-
-func main() {
-	functions.Function("CheckInbox", checkInbox)
-	functions.Start()
+type Claim struct {
+	Issuer         string
+	OriginalIssuer string
+	Properties     map[string]interface{}
+	Type           string
+	Value          string
+	ValueType      string
 }

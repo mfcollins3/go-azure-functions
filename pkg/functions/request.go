@@ -23,6 +23,7 @@ package functions
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/mfcollins3/go-azure-functions/pkg/http"
 	"github.com/mfcollins3/go-azure-functions/pkg/timer"
 	"time"
 
@@ -88,4 +89,13 @@ func (req Request) TimerInfo(key string) (info timer.Info, err error) {
 		IsPastDue: dto.IsPastDue,
 	}
 	return
+}
+
+func (req Request) HTTPRequest(key string) (
+	httpRequest http.Request,
+	err error,
+) {
+	var request http.Request
+	err = req.Get(key, &request)
+	return request, err
 }

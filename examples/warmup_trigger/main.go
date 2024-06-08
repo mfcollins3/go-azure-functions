@@ -22,15 +22,16 @@
 package main
 
 import (
-	functions "github.com/mfcollins3/go-azure-functions/pkg/function"
+	functions "github.com/mfcollins3/go-azure-functions/pkg/functions"
 	"log"
 )
 
-func initialize(response *functions.Response, request functions.Request) {
+func initialize(response *functions.Response, request functions.Request) error {
 	log.Println("TODO: initialize the Functions")
+	return nil
 }
 
 func main() {
-	functions.Function("/Warmup", initialize)
+	functions.Function("Warmup", initialize)
 	functions.Start()
 }

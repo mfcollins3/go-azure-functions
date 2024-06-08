@@ -1,0 +1,14 @@
+{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "request",
+      "methods": [
+        "post"
+      ],
+      "authLevel": "function",
+      "route": "contacts"
+    }
+  ]
+}

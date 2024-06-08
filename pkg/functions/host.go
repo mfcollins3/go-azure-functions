@@ -31,10 +31,10 @@ import (
 
 func Function(
 	pattern string,
-	handler func(*Response, Request),
+	handler func(*Response, Request) error,
 ) {
 	http.HandleFunc(
-		pattern,
+		"/"+pattern,
 		func(w http.ResponseWriter, r *http.Request) {
 			body, err := io.ReadAll(r.Body)
 			if err != nil {
@@ -52,11 +52,14 @@ func Function(
 			}
 
 			response := NewResponse()
-			handler(response, request)
+			if err = handler(response, request); err != nil {
+				log.Printf("ERROR: %v", err)
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
 
 			bytes, err := json.Marshal(response)
 			if err != nil {
-				log.Printf("ERROR: %v", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}

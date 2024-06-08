@@ -26,19 +26,31 @@ import (
 	"log"
 )
 
-func checkInbox(response *functions.Response, request functions.Request) error {
-	log.Println("TODO: Implement checkInbox")
-	timerInfo, err := request.TimerInfo("timer")
+func getContact(response *functions.Response, request functions.Request) error {
+	httpRequest, err := request.HTTPRequest("request")
 	if err != nil {
-		log.Printf("Error getting timer info: %v", err)
 		return err
 	}
 
-	log.Printf("%#v\n", timerInfo)
+	log.Printf("Received request: %s %s", httpRequest.Method, httpRequest.URL)
+	return nil
+}
+
+func createContact(
+	response *functions.Response,
+	request functions.Request,
+) error {
+	httpRequest, err := request.HTTPRequest("request")
+	if err != nil {
+		return err
+	}
+
+	log.Printf("Received request: %s %s", httpRequest.Method, httpRequest.URL)
 	return nil
 }
 
 func main() {
-	functions.Function("CheckInbox", checkInbox)
+	functions.Function("CreateContact", createContact)
+	functions.Function("GetContact", getContact)
 	functions.Start()
 }
