@@ -1,0 +1,12 @@
+{
+    "name": "goazurefunctions",
+    "image": "mcr.microsoft.com/devcontainers/base:1.0.12-bookworm",
+    "features": {},
+    "postCreateCommand": "./install.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": []
+        }
+    },
+    "remoteUser": "vscode"
+}
