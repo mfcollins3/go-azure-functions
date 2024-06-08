@@ -76,7 +76,7 @@ func Function(
 // Start listens on the port specified by the
 // FUNCTIONS_CUSTOMHANDLER_PORT environment variable. If the environment
 // variable is not set, ListenAndServe logs a fatal error.
-func Start(handler http.Handler) {
+func Start() {
 	var listenAddress string
 	if val, ok := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT"); ok {
 		listenAddress = ":" + val
@@ -84,5 +84,5 @@ func Start(handler http.Handler) {
 		log.Fatal("the FUNCTIONS_CUSTOMHANDLER_PORT environment variable is not set")
 	}
 
-	log.Fatal(http.ListenAndServe(listenAddress, handler))
+	log.Fatal(http.ListenAndServe(listenAddress, nil))
 }
