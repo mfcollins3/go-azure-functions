@@ -1,11 +1,17 @@
 {
     "name": "goazurefunctions",
     "image": "mcr.microsoft.com/devcontainers/base:1.0.12-bookworm",
-    "features": {},
+    "features": {
+        "ghcr.io/devcontainers/features/go:1": {
+            "version": "1.22.4"
+        }
+    },
     "postCreateCommand": "./install.sh",
     "customizations": {
         "vscode": {
-            "extensions": []
+            "extensions": [
+                "golang.go"
+            ]
         }
     },
     "remoteUser": "vscode"
